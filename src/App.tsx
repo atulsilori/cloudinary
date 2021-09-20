@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import {useEffect} from 'react';
+// const myEditor = cloudinary.mediaEditor();
+// myEditor.update({
+//   publicIds: ["sample"],
+//   cloudName: "demo"
+// });
+// myEditor.show();
+// myEditor.on("export",function(data){
+//   console.log(data);
+// })
 function App() {
+  useEffect(() =>{
+    const myEditor = (window as any).cloudinary.mediaEditor();
+    myEditor.update({
+    publicIds: ["sample"],
+    cloudName: "atul-silori",
+    image: {
+      steps: [     
+        "resizeAndCrop",
+        "imageOverlay",
+        "textOverlays",
+        "export"
+      ]
+    }
+    });
+    myEditor.show();
+    myEditor.on("export",(data:any)=>{
+    console.log(data);
+    })
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
     </div>
   );
 }
