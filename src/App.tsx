@@ -1,38 +1,25 @@
 import './App.css';
-import {useEffect} from 'react';
-// const myEditor = cloudinary.mediaEditor();
-// myEditor.update({
-//   publicIds: ["sample"],
-//   cloudName: "demo"
-// });
-// myEditor.show();
-// myEditor.on("export",function(data){
-//   console.log(data);
-// })
-function App() {
-  useEffect(() =>{
-    const myEditor = (window as any).cloudinary.mediaEditor();
-    myEditor.update({
-    publicIds: ["sample"],
-    cloudName: "atul-silori",
-    image: {
-      steps: [     
-        "resizeAndCrop",
-        "imageOverlay",
-        "textOverlays",
-        "export"
-      ]
-    }
-    });
-    myEditor.show();
-    myEditor.on("export",(data:any)=>{
-    console.log(data);
-    })
-  }, [])
-  return (
-    <div className="App">
+import React from 'react';
+import { Layout} from 'antd';
+import Navbar from './components/navbar';
+import { Switch, Route } from 'react-router-dom';
+import Crop from './components/crop';
+import Displayimage from './components/displayimage';
 
-    </div>
+const {  Content} = Layout;
+function App(): JSX.Element {
+  return (
+		<div className='App'>
+			<div className='cropContainer'>
+				<Switch>
+					<Layout>
+						<Navbar />
+						<Route path='/' exact={true} component={Crop} />
+						<Route path='/croppedImage' component={Displayimage} />
+					</Layout>
+				</Switch>
+			</div>
+		</div>
   );
 }
 
